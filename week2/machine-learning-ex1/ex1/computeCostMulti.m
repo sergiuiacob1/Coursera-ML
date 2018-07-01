@@ -13,7 +13,10 @@ J = 0;
 % Instructions: Compute the cost of a particular choice of theta
 %               You should set J to the cost.
 
-
+% X is M x (N + 1), theta is (N+1) x 1
+hyphotesis = X * theta; %M x 1
+error = (hyphotesis - y) .^ 2;
+J = sum (error)/(2*m);
 
 
 

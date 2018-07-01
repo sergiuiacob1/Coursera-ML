@@ -17,10 +17,12 @@ for iter = 1:num_iters
     %       of the cost function (computeCostMulti) and gradient here.
     %
 
-
-
-
-
+    % X size: M x (N + 1)
+    hypothesis = (X * theta); % M x 1
+    error = (hypothesis - y); % M x 1
+    error = (error' * X)'; % 1 x (N + 1)
+    tempTheta = theta - (error * (alpha / m));
+    theta = tempTheta;
 
 
 

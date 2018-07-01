@@ -26,7 +26,10 @@ sigma = zeros(1, size(X, 2));
 % Hint: You might find the 'mean' and 'std' functions useful.
 %       
 
-
+mu = mean (X); % 1 x N
+sigma = std (X); % 1 x N
+tempMatrix = ones (size (X, 1), 1);
+X_norm = (X .- (tempMatrix * mu)) ./ (tempMatrix * sigma);
 
 
 

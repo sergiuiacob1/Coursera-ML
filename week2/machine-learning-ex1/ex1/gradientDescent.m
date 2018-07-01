@@ -17,8 +17,6 @@ for iter = 1:num_iters
     %       of the cost function (computeCost) and gradient here.
     %
 
-    printf ("iter: %d\n", iter);
-
     % X size: M x (N + 1)
     hypothesis = (X * theta); % M x 1
     error = (hypothesis - y); % M x 1
