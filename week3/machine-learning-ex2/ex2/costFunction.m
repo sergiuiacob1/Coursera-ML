@@ -26,7 +26,7 @@ hypothesis = sigmoid(X * theta); % M x 1
 J = 1/m * ((((-y)') * log (hypothesis)) - (((ones (m, 1) - y)') * log(ones (m, 1) - hypothesis)));
 
 % =1mm∑i=1(hθ(x(i))−y(i))x(i)
-grad = 1/m * (((hypothesis .- y))' * X);
+grad = 1/m * (((hypothesis .- y))' * X)';
 
 
 
