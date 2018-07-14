@@ -21,8 +21,15 @@ p = zeros(size(X, 1), 1);
 %       can use max(A, [], 2) to obtain the max for each row.
 %
 
+X = [ones(m, 1) X]; % add the bias term
 
-
+% X * Theta1' will be 21 x 25
+firstPropagation = sigmoid (X * Theta1');
+firstPropagation = [ones((size (firstPropagation, 1)), 1) firstPropagation];
+% firstPropagation is now 21 x 26
+outputLayer = firstPropagation * Theta2';
+A = sigmoid (outputLayer);
+[~, p] = max (A, [], 2);
 
 
 
