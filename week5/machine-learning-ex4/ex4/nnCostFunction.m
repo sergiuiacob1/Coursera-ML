@@ -63,7 +63,7 @@ Theta2_grad = zeros(size(Theta2));
 %
 
 % for i = 1:m
-%     hypothesis = sigmoid(sigmoid([1 ([1 X(i, :)] * Theta1')]) * Theta2'); % 1 x 10
+%     hypothesis = sigmoid([1 sigmoid([1 X(i, :)] * Theta1')] * Theta2'); % 1 x 10
 %     y_nn = zeros (num_labels, 1); % 10 x 1
 %     y_nn (y(i)) = 1;
 %     hError = -y_nn' * log (hypothesis') - (1 .- y_nn)' * log (1 .- hypothesis');
@@ -86,9 +86,36 @@ theta2Reg = Theta2(:, 2:size(Theta2, 2));
 reg = lambda * (sum(sum(theta1Reg .^ 2)) + sum(sum(theta2Reg .^ 2))) / (2 * m);
 J += reg;
 
+% Theta1 has size 25 x 401
+% Theta2 has size 10 x 26
 
+for t = 1:m
+    % Feedforward
+    % Step 1
+    % X already has the bias term
+    a1 = X(t, :)'; % 401 x 1
+    z2 = Theta1 * a1; % 25 x 1
+    a2 = sigmoid (z2);
+    a2 = [1; a2]; % 26 x 1
+    z3 = Theta2 * a2; % 10 x 1
+    a3 = sigmoid (z3); % my hypothesis, 10 x 1
 
+    % Backpropagation
 
+    % Step 2
+    delta3 = a3 - y_nn (t, :)'; % 10 x 1
+    z2 = [1; z2]; % add bias term
+    % Step 3
+    delta2 = (Theta2' * delta3) .* sigmoidGradient (z2);
+    % Step 4
+    delta2 = delta2 (2:end); % skip ∂(2, 0);
+    Theta2_grad += delta3 * a2';
+    Theta1_grad += delta2 * a1';
+end;
+
+% Step 5
+Theta2_grad /= m;
+Theta1_grad /= m;
 
 
 
