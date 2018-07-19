@@ -22,7 +22,7 @@ W = zeros(L_out, 1 + L_in);
 % eps_init = sqrt(6)/sqrt (L_in + L_out);
 eps_init = 0.12;
 
-W = rand (L_in, L_out) .* (2 * eps_init) .- eps_init;
+W = rand(L_out, 1 + L_in) .* (2 * eps_init) .- eps_init;
 
 
 

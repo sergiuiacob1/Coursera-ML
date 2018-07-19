@@ -117,8 +117,11 @@ end;
 Theta2_grad /= m;
 Theta1_grad /= m;
 
+% Regularization
 
-
+% don't regularize the first element (Theta (i, 0))
+Theta1_grad(:, 2:end) = Theta1_grad(:, 2:end) + ((lambda/m) * Theta1(:, 2:end));
+Theta2_grad(:, 2:end) = Theta2_grad(:, 2:end) + ((lambda/m) * Theta2(:, 2:end)); 
 
 
 
